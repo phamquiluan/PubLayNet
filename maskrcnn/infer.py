@@ -54,7 +54,10 @@ def main(argv):
     model = get_instance_segmentation_model(num_classes)
     model.cuda()
 
-    checkpoint_path = "/home/z/Downloads/model_12000.pth"
+    if os.path.exists('model_12000.pth')
+        checkpoint_path = "model_12000.pth"
+    else:
+        checkpoint_path = "/home/z/Downloads/model_12000.pth"
 
     assert os.path.exists(checkpoint_path)
     checkpoint = torch.load(checkpoint_path, map_location='cpu')
