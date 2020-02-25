@@ -4,6 +4,8 @@ PubLayNet is a large dataset of document images, of which the layout is annotate
 
 for more information, see [PubLayNet original](https://github.com/ibm-aur-nlp/PubLayNet)
 
+## TODO: evaluate scores
+
 ## Recent updates 
 
 
