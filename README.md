@@ -26,17 +26,7 @@ PubLayNet is a large dataset of document images, of which the layout is annotate
 
 ## Inference
 
-
-Download trained weights here, locate it in [maskrcnn directory](maskrcnn)
-
-
-- [12000x16 iterations](https://drive.google.com/open?id=1T2ciEJ7npW_aBpNrKHiUAluyk04K0AWK)
-- [50000x16 iterations](https://drive.google.com/open?id=1vl3XAYbGKlv70SNPReStZQ6I0Z9v1CSW)
-- [120000x16 iterations](https://drive.google.com/open?id=13fhd_SS7fLrjLrCjVpCwOYGt_SlQ_7FW)
-- [161000x16 iterations](https://drive.google.com/open?id=1KNOyw_D980bvFKb8U8NPPt-NWSsWJDe6)
-- [174000x16 iterations](https://drive.google.com/open?id=13fhd_SS7fLrjLrCjVpCwOYGt_SlQ_7FW)
-- [200000x16 iterations](https://drive.google.com/open?id=1rJ3fowtxGIcORzIZbQe9ibHN0ORoqkLN)
-
+Download trained weights in Benchmarking section above, locate it in [maskrcnn directory](maskrcnn)
 
 Run
 ```
