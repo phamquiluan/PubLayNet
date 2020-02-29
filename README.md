@@ -40,22 +40,3 @@ python infer.py <path_to_image>
 **PMC4334925_00006.jpg**  | **PMC538274_00004.jpg**
 
 
-
-
-## Getting data
-
-Images and annotations can be downloaded [here](https://developer.ibm.com/exchanges/data/all/publaynet/). The training set is quite large, so two options are offered. We split the training set into 7 batches, which can be separately downloaded. Or you can also download the full set at once.
-
-If direct download in browser is unstable or you want to download the data from the command line, you can use curl or wget to download the data.
-
-```
-curl -o <YOUR_TARGET_DIR>/publaynet.tar.gz https://dax.cdn.appdomain.cloud/dax-publaynet/1.0.0/publaynet.tar.gz
-```
-
-```
-wget -O <YOUR_TARGET_DIR>/publaynet.tar.gz https://dax.cdn.appdomain.cloud/dax-publaynet/1.0.0/publaynet.tar.gz
-```
-
-## Annotation format
-
-The annotation files follows the [json format of the Object Detection task of MS COCO](http://cocodataset.org/#format-data)
