@@ -1,37 +1,83 @@
-import cv2 #line:1
+import cv2
 import numpy as np
-def show (O0OO0O0O0O0O00O00 ,name ="disp",width =1000 ):#line:4
-    ""#line:8
-    cv2 .namedWindow (name ,cv2 .WINDOW_GUI_EXPANDED )#line:9
-    cv2 .resizeWindow (name ,width ,1000 )#line:10
-    cv2 .imshow (name ,O0OO0O0O0O0O00O00 )#line:11
-    cv2 .waitKey (0 )#line:12
-    cv2 .destroyAllWindows ()#line:13
-def overlay_mask (OO0OOOOO0OO0OO0OO ,OOO00OOOOOOOO000O ,alpha =0.5 ):#line:16
-    O0O00O0O00O0OOO00 =(np .random .random ((1 ,3 ))*153 +102 ).tolist ()[0 ]#line:17
-    OOO00OOOOOOOO000O =np .dstack ([OOO00OOOOOOOO000O .astype (np .uint8 )]*3 )#line:19
-    OOO00OOOOOOOO000O =cv2 .threshold (OOO00OOOOOOOO000O ,127.5 ,255 ,cv2 .THRESH_BINARY )[1 ]#line:20
-    O00O00OOO0O0O000O =255 -OOO00OOOOOOOO000O #line:21
-    OOOO0O00O0OOOOOOO =OO0OOOOO0OO0OO0OO .copy ()#line:23
-    OOOO0O00O0OOOOOOO =np .minimum (OOOO0O00O0OOOOOOO ,O00O00OOO0O0O000O )#line:24
-    O00O0OO0O0OO00000 =(OOO00OOOOOOOO000O .astype (np .bool )*O0O00O0O00O0OOO00 ).astype (np .uint8 )#line:26
-    OOOO0O00O0OOOOOOO =np .maximum (OOOO0O00O0OOOOOOO ,O00O0OO0O0OO00000 ).astype (np .uint8 )#line:27
-    OO0OOOOO0OO0OO0OO =cv2 .addWeighted (OO0OOOOO0OO0OO0OO ,alpha ,OOOO0O00O0OOOOOOO ,1 -alpha ,0 )#line:29
-    return OO0OOOOO0OO0OO0OO #line:30
-def overlay_ann (O00O000OO0O0O0OO0 ,OO00O000OOO00O00O ,O0OOOO00000OOO0OO ,OOO0O000OOOOOO00O ,O0OO000O000O0O000 ,alpha =0.5 ):#line:33
-    O000O000O00O0000O =np .random .random ((1 ,3 ))#line:34
-    OO0O00000OOO0O00O =(O000O000O00O0000O *153 +102 ).tolist ()[0 ]#line:35
-    O00O0OO0OO00O00O0 =(O000O000O00O0000O *183 +72 ).tolist ()[0 ]#line:36
-    OO00O000OOO00O00O =np .dstack ([OO00O000OOO00O00O .astype (np .uint8 )]*3 )#line:38
-    OO00O000OOO00O00O =cv2 .threshold (OO00O000OOO00O00O ,127.5 ,255 ,cv2 .THRESH_BINARY )[1 ]#line:39
-    O0O0OOO00000O00O0 =255 -OO00O000OOO00O00O #line:40
-    O0OOO00O0OOOOO000 =O00O000OO0O0O0OO0 .copy ()#line:42
-    O0OOO00O0OOOOO000 =np .minimum (O0OOO00O0OOOOO000 ,O0O0OOO00000O00O0 )#line:43
-    OOOO00O0000O0OOO0 =(OO00O000OOO00O00O .astype (np .bool )*OO0O00000OOO0O00O ).astype (np .uint8 )#line:45
-    O0OOO00O0OOOOO000 =np .maximum (O0OOO00O0OOOOO000 ,OOOO00O0000O0OOO0 ).astype (np .uint8 )#line:47
-    O00O000OO0O0O0OO0 =cv2 .addWeighted (O00O000OO0O0O0OO0 ,alpha ,O0OOO00O0OOOOO000 ,1 -alpha ,0 )#line:49
-    cv2 .rectangle (O00O000OO0O0O0OO0 ,(O0OOOO00000OOO0OO [0 ],O0OOOO00000OOO0OO [1 ]),(O0OOOO00000OOO0OO [2 ],O0OOOO00000OOO0OO [3 ]),OO0O00000OOO0O00O ,1 )#line:57
-    (OO0O0000O0OOOO00O ,O00000O0O00O000OO ),O0OO0O0OOOO0O00O0 =cv2 .getTextSize ("{}".format (OOO0O000OOOOOO00O ),cv2 .FONT_HERSHEY_SIMPLEX ,0.3 ,1 )#line:64
-    cv2 .rectangle (O00O000OO0O0O0OO0 ,(O0OOOO00000OOO0OO [0 ],O0OOOO00000OOO0OO [1 ]+10 ),(O0OOOO00000OOO0OO [0 ]+OO0O0000O0OOOO00O ,O0OOOO00000OOO0OO [1 ]+10 -O00000O0O00O000OO ),(223 ,128 ,255 ),cv2 .FILLED )#line:72
-    cv2 .putText (O00O000OO0O0O0OO0 ,"{}".format (OOO0O000OOOOOO00O ),(O0OOOO00000OOO0OO [0 ],O0OOOO00000OOO0OO [1 ]+10 ),cv2 .FONT_HERSHEY_SIMPLEX ,0.3 ,(0 ,0 ,0 ),1 )#line:81
-    return O00O000OO0O0O0OO0 #line:83
+
+def show(img, name="disp", width=1000):
+    """
+    name: name of window, should be name of img
+    img: source of img, should in type ndarray
+    """
+    cv2.namedWindow(name, cv2.WINDOW_GUI_EXPANDED)
+    cv2.resizeWindow(name, width, 1000)
+    cv2.imshow(name, img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+def overlay_mask(image, mask, alpha=0.5):
+    c = (np.random.random((1, 3)) * 153 + 102).tolist()[0]
+ 
+    mask = np.dstack([mask.astype(np.uint8)] * 3)
+    mask = cv2.threshold(mask, 127.5, 255, cv2.THRESH_BINARY)[1]
+    inv_mask = 255 - mask
+
+    overlay = image.copy()
+    overlay = np.minimum(overlay, inv_mask) 
+
+    color_mask = (mask.astype(np.bool) * c).astype(np.uint8)
+    overlay = np.maximum(overlay, color_mask).astype(np.uint8) 
+
+    image = cv2.addWeighted(image, alpha, overlay, 1 - alpha, 0)
+    return image
+
+
+def overlay_ann(image, mask, box, label, score, alpha=0.5):
+    c = np.random.random((1, 3))
+    mask_color = (c * 153 + 102).tolist()[0]
+    text_color = (c * 183 + 72).tolist()[0]
+ 
+    mask = np.dstack([mask.astype(np.uint8)] * 3)
+    mask = cv2.threshold(mask, 127.5, 255, cv2.THRESH_BINARY)[1]
+    inv_mask = 255 - mask
+
+    overlay = image.copy()
+    overlay = np.minimum(overlay, inv_mask) 
+
+    color_mask = (mask.astype(np.bool) * mask_color).astype(np.uint8)
+        
+    overlay = np.maximum(overlay, color_mask).astype(np.uint8) 
+
+    image = cv2.addWeighted(image, alpha, overlay, 1 - alpha, 0)
+
+    # draw on color mask
+    cv2.rectangle(
+        image,
+        (box[0], box[1]),
+        (box[2], box[3]),
+        mask_color, 1
+    )
+
+    (label_size_width, label_size_height), base_line = \
+        cv2.getTextSize(
+            "{}".format(label),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.3, 1
+        )
+
+    cv2.rectangle(
+        image,
+        (box[0], box[1] + 10),
+        (box[0] + label_size_width, box[1] + 10 - label_size_height),
+        (223, 128, 255),
+        cv2.FILLED
+    )
+
+    cv2.putText(
+        image,
+        # "{}: {:.3f}".format(label, score),
+        "{}".format(label),
+        (box[0], box[1] + 10),
+        cv2.FONT_HERSHEY_SIMPLEX,
+        0.3, (0, 0, 0), 1
+    )
+ 
+    return image
