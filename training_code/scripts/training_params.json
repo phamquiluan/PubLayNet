@@ -1,0 +1,28 @@
+{
+	"TrainingJobName": null,
+	"HyperParameters": {},
+	"AlgorithmSpecification": {
+		"TrainingImage": null,
+		"TrainingInputMode": "File"
+	},
+	"InputDataConfig": [],
+	"OutputDataConfig": {
+		"S3OutputPath": null
+	},
+	"ResourceConfig": {
+		"InstanceType": "",
+		"InstanceCount": 1,
+		"VolumeSizeInGB": 1000
+	},
+	"StoppingCondition": {
+		"MaxRuntimeInSeconds": null,
+		"MaxWaitTimeInSeconds": null
+	},
+	"EnableNetworkIsolation": false,
+	"EnableManagedSpotTraining": true,
+	"CheckpointConfig": {
+		"S3Uri": null,
+		"LocalPath": ""
+	},
+	"RoleArn": ""
+}

@@ -1,0 +1,11 @@
+imgaug
+tensorboard
+pytorchcv
+sklearn
+natsort
+gputil
+tqdm
+pycocotools
+awscli
+boto3
+sagemaker

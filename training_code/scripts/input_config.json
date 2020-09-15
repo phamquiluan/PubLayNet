@@ -1,0 +1,17 @@
+[{
+	"ChannelName": "train",
+	"DataSource": {
+		"S3DataSource": {
+			"S3DataType": "S3Prefix",
+			"S3Uri": null,
+			"S3DataDistributionType": "FullyReplicated"
+		}
+	},
+	"CompressionType": "None",
+	"RecordWrapperType": "None",
+	"InputMode": "File"
+}]
+
+
+
+
