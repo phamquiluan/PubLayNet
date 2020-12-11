@@ -71,6 +71,13 @@ def main(argv):
         help = "directory of path of image to be passed into model"
 
     )
+    parser.add_argument(
+        "--output_path",
+        default = None,
+        type  = str,
+        required = True,
+        help = "output directory of model results"
+    )
 
     args = parser.parse_args()
 
@@ -124,7 +131,11 @@ def main(argv):
             image = overlay_ann(image, m, box, label, score)
 
     # cv2.imwrite('/home/z/research/publaynet/example_images/{}'.format(os.path.basename(image_path)), image)
-    cv2.imwrite('output/{}'.format(os.path.basename(image_path)), image)
+    if os.path.exists(args.output_path):
+        cv2.imwrite(args.output_path+'/{}'.format(os.path.basename(image_path)), image)
+    else:
+        os.mkdir(args.output_path)
+        cv2.imwrite(args.output_path+'/{}'.format(os.path.basename(image_path)), image)
 
     show(image)
 
