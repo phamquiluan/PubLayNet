@@ -33,7 +33,8 @@ Download trained weights in Benchmarking section above, locate it in [maskrcnn d
 Run
 ```
 cd maskrcnn
-python infer.py <path_to_image>
+python infer.py --image_path = "document_image_dir/image.jpg" --model_path = "mrcnn_model_dir/model.pth" --output_path="model_segmentation_output_dir/"
+
 ```
 
 ## Avarage Precision in validation stages (via Tensorboard)

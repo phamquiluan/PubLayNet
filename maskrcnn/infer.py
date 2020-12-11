@@ -6,6 +6,7 @@ import torchvision
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 from torchvision.models.detection.mask_rcnn import MaskRCNNPredictor
 from torchvision.transforms import transforms
+import argparse
 
 import cv2
 import numpy as np
@@ -24,6 +25,7 @@ torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
 
+
 CATEGORIES2LABELS = {
     0: "bg",
     1: "text",
@@ -32,8 +34,8 @@ CATEGORIES2LABELS = {
     4: "table",
     5: "figure"
 }
-
-
+SAVE_PATH = "output/"
+MODEL_PATH = "model_196000.pth"
 def get_instance_segmentation_model(num_classes):
     model = torchvision.models.detection.maskrcnn_resnet50_fpn(pretrained=True)
     in_features = model.roi_heads.box_predictor.cls_score.in_features
@@ -54,26 +56,53 @@ def main(argv):
     model = get_instance_segmentation_model(num_classes)
     model.cuda()
 
-    if os.path.exists('model_12000.pth')
-        checkpoint_path = "model_12000.pth"
-    else:
-        checkpoint_path = "/home/z/Downloads/model_12000.pth"
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--model_path", 
+        default = MODEL_PATH,
+        type = str,
+        help = "model checkpoint directory"
+    )
+    parser.add_argument(
+        "--image_path",
+        default = None,
+        type = str,
+        required = True,
+        help = "directory of path of image to be passed into model"
 
+    )
+    parser.add_argument(
+        "--output_path",
+        default = None,
+        type  = str,
+        required = True,
+        help = "output directory of model results"
+    )
+
+    args = parser.parse_args()
+
+    if os.path.exists(MODEL_PATH):
+        checkpoint_path = MODEL_PATH
+    else:
+        checkpoint_path = args.model_path
+
+    print(checkpoint_path)
     assert os.path.exists(checkpoint_path)
     checkpoint = torch.load(checkpoint_path, map_location='cpu')
     model.load_state_dict(checkpoint['model'])
     model.eval()
 
     # NOTE: custom  image
-    if len(argv) > 0 and os.path.exists(argv[0]):
-        image_path = argv[0]
+    if len(argv) > 0 and os.path.exists(args.image_path):
+        image_path = args.image_path
     else:
         image_path = '/home/z/Downloads/hor02_013.A.A0001.png'
 
+    print(image_path)
     assert os.path.exists(image_path)
 
     image = cv2.imread(image_path)
-    rat = 1300 / image.shape[0]
+    rat = 1000 / image.shape[0]
     image = cv2.resize(image, None, fx=rat, fy=rat)
 
     transform = transforms.Compose([
@@ -98,11 +127,17 @@ def main(argv):
 
             score = pred["scores"][idx].item()
 
-            image = overlay_mask(image, m)
-            # image = overlay_ann(image, m, box, label, score)
+            # image = overlay_mask(image, m)
+            image = overlay_ann(image, m, box, label, score)
 
-    cv2.imwrite('/home/z/research/publaynet/example_images/{}'.format(os.path.basename(image_path)), image)
-    # show(image)
+    # cv2.imwrite('/home/z/research/publaynet/example_images/{}'.format(os.path.basename(image_path)), image)
+    if os.path.exists(args.output_path):
+        cv2.imwrite(args.output_path+'/{}'.format(os.path.basename(image_path)), image)
+    else:
+        os.mkdir(args.output_path)
+        cv2.imwrite(args.output_path+'/{}'.format(os.path.basename(image_path)), image)
+
+    show(image)
 
 
 if __name__ == "__main__":

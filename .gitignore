@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+maskrcnn/output/
 build/
 develop-eggs/
 dist/
@@ -134,3 +135,4 @@ deploy.prototxt.txt
 res10_300x300_ssd_iter_140000.caffemodel
 run.sh
 saved
+*.pth
