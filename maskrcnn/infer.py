@@ -120,8 +120,8 @@ def main(argv):
 
             score = pred["scores"][idx].item()
 
-            image = overlay_mask(image, m)
-            # image = overlay_ann(image, m, box, label, score)
+            # image = overlay_mask(image, m)
+            image = overlay_ann(image, m, box, label, score)
 
     # cv2.imwrite('/home/z/research/publaynet/example_images/{}'.format(os.path.basename(image_path)), image)
     cv2.imwrite('output/{}'.format(os.path.basename(image_path)), image)
