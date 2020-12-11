@@ -33,7 +33,8 @@ Download trained weights in Benchmarking section above, locate it in [maskrcnn d
 Run
 ```
 cd maskrcnn
-python infer.py <path_to_image>
+python infer.py --image_path = "document_image_dir/image.jpg" --model_path = "mrcnn_model_dir/model.pth" --output_path="model_segmentation_output_dir/"
+
 ```
 
 ## Avarage Precision in validation stages (via Tensorboard)
@@ -44,9 +45,3 @@ python infer.py <path_to_image>
 ## Training
 
 Please take a look at `training_code` dir. Sorry for the dirty code but I really don't have time to refactor it :D 
-
-## Infer Command
-### This command can be used to run a single image through the PubLayout model
-```
-python infer.py --image_path = "document_image_path/image.jpg" --model_path = "mrcnn_model_path/model.pth"
-```
