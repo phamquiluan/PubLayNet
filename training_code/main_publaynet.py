@@ -477,7 +477,7 @@ def train_one_epoch(
 
                 model.eval()
 
-                from barez import overlay_ann	
+                # from barez import overlay_ann	
                 debug_image = None
                 debug_image_list = []
                 cnt = 0
@@ -507,17 +507,17 @@ def train_one_epoch(
                             m =  mask[0].mul(255).byte().cpu().numpy()
                             box = list(map(int, pred["boxes"][idx].tolist())) 
                             score = pred["scores"][idx].item()
-                            image = overlay_ann(image, m, box, "", score)
+                            # image = overlay_ann(image, m, box, "", score)
 
-                    if debug_image is None:
-                        debug_image = image
-                    else:
-                        debug_image = np.concatenate((debug_image, image), axis=1)
+                    # if debug_image is None:
+                    #     debug_image = image
+                    # else:
+                    #     debug_image = np.concatenate((debug_image, image), axis=1)
 
-                    if cnt == 10:
-                        cnt = 0
-                        debug_image_list.append(debug_image)
-                        debug_image = None
+                    # if cnt == 10:
+                    #     cnt = 0
+                    #     debug_image_list.append(debug_image)
+                    #     debug_image = None
                     
                 avg_length = np.mean([i.shape[1] for i in debug_image_list])
 

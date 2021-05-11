@@ -65,7 +65,6 @@ def main():
 
     model.eval()
 
-    from barez import overlay_ann, show
     from datasets.tb_detection import table_transforms
     debug_image = None
     debug_image_list = []
@@ -113,10 +112,10 @@ def main():
                 m =  mask[0].mul(255).byte().cpu().numpy()
                 box = list(map(int, pred["boxes"][idx].tolist())) 
                 score = pred["scores"][idx].item()
-                image = overlay_ann(image, m, box, "", score)
+                # image = overlay_ann(image, m, box, "", score)
         
         # show(image)
-        cv2.imwrite("./debug/{}".format(image_name), image)
+        # cv2.imwrite("./debug/{}".format(image_name), image)
 
 
 
