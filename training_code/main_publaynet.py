@@ -150,7 +150,6 @@ parser.add_argument("--wd", "--weight-decay", default=0.0001, type=float, dest="
 parser.add_argument("--print-freq", default=10, type=int)
 parser.add_argument("--aspect-ratio-group-factor", default=0, type=int)
 parser.add_argument("--test-only", dest="test_only", action="store_true",)
-parser.add_argument("--pretrained", dest="pretrained", action="store_true",)
 
 
 # for distributed training, distributed training parameters
